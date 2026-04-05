@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cross-Center Decision Intelligence</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- External APIs -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script> <!-- Vis.js Network Graph -->
+
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Top Nav -->
+        <header class="top-nav glass-panel">
+            <div class="brand">
+                <div class="logo-icon"></div>
+                <h1>Decision Intelligence <span class="highlight">Engine</span></h1>
+            </div>
+            <div class="header-metrics">
+                <div class="metric">
+                    <span class="value" id="val-events">--</span>
+                    <span class="label">Ingested Events</span>
+                </div>
+                <div class="metric highlight-metric">
+                    <span class="value" id="val-conflicts">--</span>
+                    <span class="label">Active Conflicts</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Layout -->
+        <div class="main-grid">
+            
+            <!-- Left Sidebar -->
+            <aside class="sidebar glass-panel">
+                <div class="panel-header" style="display:flex; justify-content:space-between; align-items:center;">
+                    <h2>Conflict Detection</h2>
+                    <button class="audit-btn" id="btn-export-audit" title="Download Intelligence Brief JSON">⭳ Audit</button>
+                </div>
+                <div class="conflict-scroll" id="conflict-list">
+                    <!-- Cards -->
+                </div>
+
+
+
+                <div class="panel-header" style="margin-top: 1rem;">
+                    <h2>Event Ingestion Analytics</h2>
+                </div>
+                <div class="analytics-container">
+                    <canvas id="riskChart"></canvas>
+                </div>
+            </aside>
+
+            <!-- Center View (Vis.js 2D Network Physics) -->
+            <div class="graph-view glass-panel">
+                <div class="panel-header overlay-header">
+                    <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                        <div>
+                            <h2>Interactive Physics Graph</h2>
+                            <p>Live Correlated Event Dependencies</p>
+                        </div>
+                        <div class="scrubber-container">
+                            <label for="time-scrubber" id="time-label">Timeline: Live</label>
+                            <input type="range" id="time-scrubber" min="0" max="100" value="100" />
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="graph-2d" class="graph-canvas"></div>
+            </div>
+
+            <!-- Right Panel (AI / Explanation) -->
+            <div class="intell-panel glass-panel">
+                <div class="panel-header">
+                    <div class="pulse-indicator"></div>
+                    <h2>Agentic Root-Cause Evaluator</h2>
+                </div>
+                <div class="intelligence-log" id="ai-log">
+                    <div class="log-placeholder">
+                        <div class="spinner"></div>
+                        <p>Awaiting conflict selection to generate intelligence brief...</p>
+                    </div>
+                </div>
+                <div class="action-footer" id="action-footer" style="padding: 1rem; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; opacity: 0; pointer-events: none; transition: opacity 0.5s ease;">
+                    <button class="remediate-btn" id="btn-remediate" onclick="executeRemediation()">[ Execute Autopilot Remediation ]</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+    <script src="/static/app.js"></script>
+</body>
+</html>
